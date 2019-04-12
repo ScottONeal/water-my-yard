@@ -1,0 +1,14 @@
+{
+  "name": "water-my-yard",
+  "version": "1.0.0",
+  "description": "Water my yard.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Scott O'Neal",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^18.1.0"
+  }
+}
