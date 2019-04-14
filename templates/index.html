@@ -1,0 +1,8 @@
+<html>
+  <body>
+    <h2>Water My Yard</h2>
+    {{#each sprinklers}} 
+    <p>{{name}}: Active({{active}}) <a href="/api/sprinkler/{{@index}}/activate">On</a>&nbsp;<a href="/api/sprinkler/{{@index}}/deactivate">Off</a></p>
+    {{/each}}
+  </body>
+</html>
