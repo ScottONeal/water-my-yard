@@ -1,16 +1,6 @@
-const Sprinkler = require('./models/sprinkler');
-
-const sprinklers = [
-  new Sprinkler({ name: 'Sprinkler 1', active: false, pinF: 15, pinR: 13, pinE: 11 }),
-  new Sprinkler({ name: 'Sprinkler 2', active: false, pinF: 16, pinR: 18, pinE: 22 }),
-  new Sprinkler({ name: 'Sprinkler 3', active: false, pinF: 21, pinR: 23, pinE: 19 })
-];
+const { sprinklers } = require('./models/sprinklers');
 
 async function setup(wmy) {
-  for ( const sprinkler of sprinklers ) {
-    await sprinkler.setup();
-  }
-
   wmy.server.route({
     method: 'GET',
     path: '/',
@@ -24,8 +14,14 @@ async function setup(wmy) {
     method: 'GET',
     path: '/api/sprinkler/{id}/{action}',
     handler: (req) => {
-      sprinklers[req.params.id][req.params.action]();
-      return JSON.stringify({ status: 'success' });
+      try {
+        sprinklers[req.params.id][req.params.action]();
+        return JSON.stringify({ status: 'success' });
+      }
+      catch (error) {
+        request.response.code(500);
+        return JSON.stringify({ status: 'failed', error });
+      }
     }
   })
 }

@@ -2,8 +2,8 @@ const Hapi       = require('@hapi/hapi');
 const Vision     = require('@hapi/vision');
 const Good       = require('good');
 const Handlebars = require('handlebars');
-
 const routes     = require('./routes');
+const sprinklers = require('./models/sprinklers');
 
 class WaterMyYardServer {
   constructor() {
@@ -23,6 +23,7 @@ class WaterMyYardServer {
   async setup() {
     try {
       await this.setupLogging();
+      await this.setupSprinklers();
       await this.setupViews();
       await this.setupRoutes();
     }
@@ -53,6 +54,10 @@ class WaterMyYardServer {
         }
       }
     });
+  }
+
+  async setupSprinklers() {
+    await sprinklers.setup();
   }
 
   async setupViews() {
