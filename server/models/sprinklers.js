@@ -8,6 +8,10 @@ const sprinklers = [
 
 async function setup() {
   for ( const sprinkler of sprinklers ) {
+    if ( process.env.WMY_BYPASS_SPRINKLER_SETUP ) {
+      return;
+    }
+
     await sprinkler.setup();
   }
 
