@@ -1,6 +1,7 @@
 {
   "name": "water-my-yard",
   "version": "1.0.0",
+  "repository": "https://github.com/ScottONeal/water-my-yard",
   "description": "Water my yard.",
   "main": "server.js",
   "scripts": {
