@@ -1,8 +1,42 @@
 <html>
+  <head>
+    <link rel="icon" href="/public/favicon.ico"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="/public/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
+  </head>
   <body>
-    <h2>Water My Yard</h2>
-    {{#each sprinklers}} 
-    <p>{{name}}: Active({{active}}) <a href="/api/sprinkler/{{@index}}/activate">On</a>&nbsp;<a href="/api/sprinkler/{{@index}}/deactivate">Off</a></p>
-    {{/each}}
+    <div class="ui center aligned grid">
+      <div class="column">
+        <h2 class="ui image header">
+          <div class class="content">Water My Yard!</div>
+        </h2>
+        <div class="ui container">
+          <div class="ui one cards">
+            {{#each sprinklers}} 
+            <div id="sprinkler-{{@index}}" class="ui card">
+              <div class="content">
+                <div class="header">
+                  <i class="{{#if active}}blue {{/if}}tint icon"></i>&nbsp;{{name}}
+                </div>
+                <div class="description">
+                  {{#if active}}Running since:{{else}}Deactive since:{{/if}}
+                  <span class="timer-{{@index}}">{{# if active}}{{activeTs}}{{else}}{{#if deactivatedTs}}{{deactivatedTs}}{{else}}N/A{{/if}}{{/if}}</span>
+                </div>
+              </div>
+              <div class="ui{{#if active}} blue{{/if}} bottom attach button sprinkler-toggle" id="{{@index}}" {{#if active}}active="true">Deactivate{{else}}active="false">Activate{{/if}}</div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="/public/main.js"></script>
   </body>
 </html>

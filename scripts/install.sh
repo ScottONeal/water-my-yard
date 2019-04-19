@@ -7,7 +7,7 @@ fi
 
 cd $HOME/water-my-yard
 echo "Installing npm dependencies"
-#npm install 1>/dev/null
+npm install 1>/dev/null
 
 echo "Checking for pm2"
 which pm2 &>/dev/null

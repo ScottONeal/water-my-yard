@@ -3,9 +3,20 @@ const { sprinklers } = require('./models/sprinklers');
 async function setup(wmy) {
   wmy.server.route({
     method: 'GET',
+    path: '/public/{param*}',
+    handler: {
+      directory: {
+        path: './',
+        listing: true,
+        redirectToSlash: true
+      }
+    }
+  });
+
+  wmy.server.route({
+    method: 'GET',
     path: '/',
     handler: (req, h) => {
-      console.log(h.view);
       return h.view('index', { sprinklers });
     }
   });
@@ -13,10 +24,11 @@ async function setup(wmy) {
   wmy.server.route({
     method: 'GET',
     path: '/api/sprinkler/{id}/{action}',
-    handler: (req) => {
+    handler: async (req) => {
+      const id = req.params.id;
       try {
-        sprinklers[req.params.id][req.params.action]();
-        return JSON.stringify({ status: 'success' });
+        await sprinklers[id][req.params.action]();
+        return JSON.stringify(sprinklers[id]);
       }
       catch (error) {
         request.response.code(500);
