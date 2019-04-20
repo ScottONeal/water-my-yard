@@ -4,7 +4,7 @@ const setActivatedSprinkler = (sprinkler) => {
   const card = $(`#sprinkler-${sprinkler.id}`);
 
   card.find('.header > i').addClass('blue');
-  $(`#${sprinkler.id}`).attr('active', true).addClass('blue').text('Deactivate');
+  $(`#${sprinkler.id}.sprinkler-toggle`).attr('active', true).addClass('blue').text('Deactivate');
 }
 
 const setDeactivatedSprinkler = (sprinkler) => {
@@ -12,7 +12,7 @@ const setDeactivatedSprinkler = (sprinkler) => {
 
   card.removeClass('blue');
   card.find('.header > i').removeClass('blue');
-  $(`#${sprinkler.id}`).attr('active', false).removeClass('blue').text('Activate');
+  $(`#${sprinkler.id}.sprinkler-toggle`).attr('active', false).removeClass('blue').text('Activate');
 }
 
 $('.sprinkler-toggle').click(function() {
@@ -22,17 +22,16 @@ $('.sprinkler-toggle').click(function() {
   if ( active ) {
     $.getJSON(`/api/sprinkler/${id}/deactivate`)
       .done(setDeactivatedSprinkler)
-      .reject(console.error);
+      .fail(console.error);
   }
   else {
     $.getJSON(`/api/sprinkler/${id}/activate`)
       .done(setActivatedSprinkler)
-      .reject(console.error);
+      .fail(console.error);
   }
 });
 
-let currentId;
-let currentNameEl;
+let currentId, currentElement;
 $('#change-name-save').click(function() {
   const name = $('#change-name-value').val();
 
@@ -43,13 +42,16 @@ $('#change-name-save').click(function() {
     url: `/api/sprinkler/${currentId}`,
     data: { name }
   })
-  .done(() => currentNameEl.text(name));
+  .done(() => {
+    currentElement.text(name);
+    currentElement.popup('hide');
+  })
 });
 
 $('.sprinkler-name')
   .on('click', function() {
-    currentNameEl = $(this);
-    currentId     = $(this).attr('id');
+    currentElement = $(this);
+    currentId      = $(this).attr('id');
     $('#change-name-value').val($(this).text());
   })
   .popup({
