@@ -37,3 +37,7 @@ __Non Essential Components:__
 
 ### High View Diagram
 ![High View Diagram](./docs/water-my-yard-diagram.png)
+
+### Developing
+
+If you would like to bypass GPIO usage but maintain the sprinkler API for development then set env var `WMY_BYPASS_SPRINKLER_SETUP=1`
