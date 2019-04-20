@@ -1,0 +1,5 @@
+[
+  { "id": 0, "name": "Backyard Rear", "pinF": 15, "pinR": 13, "pinE": 11 },
+  { "id": 1, "name": "Backyard Front", "pinF": 16, "pinR": 18, "pinE": 22 },
+  { "id": 2, "name": "Unassigned", "pinF": 21, "pinR": 23, "pinE": 19 }
+]

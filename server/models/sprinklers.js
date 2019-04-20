@@ -1,14 +1,13 @@
 const Sprinkler = require('./sprinkler');
+const config    = require('../../config');
 
-const sprinklers = [
-  new Sprinkler({ id: 0, name: 'Sprinkler 1', active: false, pinF: 15, pinR: 13, pinE: 11 }),
-  new Sprinkler({ id: 1, name: 'Sprinkler 2', active: false, pinF: 16, pinR: 18, pinE: 22 }),
-  new Sprinkler({ id: 2, name: 'Sprinkler 3', active: false, pinF: 21, pinR: 23, pinE: 19 })
-];
+const sprinklers = [];
 
 async function setup() {
-  for ( const sprinkler of sprinklers ) {
+  for ( const sprinklerConf of config ) {
+    const sprinkler = new Sprinkler(sprinklerConf);
     await sprinkler.setup();
+    sprinklers.push(sprinkler);
   }
 
   return sprinklers;
