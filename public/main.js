@@ -30,4 +30,31 @@ $('.sprinkler-toggle').click(function() {
       .reject(console.error);
   }
 });
+
+let currentId;
+let currentNameEl;
+$('#change-name-save').click(function() {
+  const name = $('#change-name-value').val();
+
+  if ( !name ) return;
+
+  $.ajax({
+    method: 'PUT',
+    url: `/api/sprinkler/${currentId}`,
+    data: { name }
+  })
+  .done(() => currentNameEl.text(name));
+});
+
+$('.sprinkler-name')
+  .on('click', function() {
+    currentNameEl = $(this);
+    currentId     = $(this).attr('id');
+    $('#change-name-value').val($(this).text());
+  })
+  .popup({
+    on: 'click',
+    popup: $('#popup-name-change'),
+    position: 'bottom center',
+  });
 });

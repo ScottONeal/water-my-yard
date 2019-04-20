@@ -19,7 +19,7 @@
             <div id="sprinkler-{{@index}}" class="ui card">
               <div class="content">
                 <div class="header">
-                  <i class="{{#if active}}blue {{/if}}tint icon"></i>&nbsp;{{name}}
+                  <i class="{{#if active}}blue {{/if}}tint icon"></i>&nbsp;<span class="sprinkler-name" id="{{id}}">{{name}}</span>
                 </div>
                 <div class="description">
                   {{#if active}}Running since:{{else}}Deactive since:{{/if}}
@@ -34,10 +34,20 @@
       </div>
     </div>
 
+    <div id="popup-name-change" class="ui fluid popup transition hidden">
+      <div class="ui column">
+        <div class="ui input">
+          <input id="change-name-value" type="text" />&nbsp;
+          <button id="change-name-save" class="ui primary button">Save</button>
+        </div>
+      </div>
+    </div>
+
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script src="/public/main.js"></script>
   </body>
 </html>
