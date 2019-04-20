@@ -1,3 +1,5 @@
+export NODE_ENV=production
+
 which node &> /dev/null
 
 if [ $? -ne 0 ]; then
